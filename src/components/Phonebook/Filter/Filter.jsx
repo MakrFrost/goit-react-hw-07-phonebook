@@ -1,7 +1,14 @@
 import PropTypes from 'prop-types';
-// css
+import { useDispatch, useSelector } from 'react-redux';
+import { change } from '../redux/filerSlicer';
 
-function Filter({ filter, onFilterChange }) {
+function Filter() {
+  const dispatch = useDispatch();
+  const filter = useSelector(state => state.filter);
+  const handleChange = value => {
+    dispatch(change(value));
+  };
+
   return (
     <div>
       <label>
@@ -9,7 +16,7 @@ function Filter({ filter, onFilterChange }) {
         <input
           type="text"
           value={filter}
-          onChange={event => onFilterChange(event.target.value)}
+          onChange={event => handleChange(event.target.value)}
         />
       </label>
     </div>
