@@ -1,4 +1,4 @@
-import { useGetContactsQuery } from './redux/contactsApi';
+import { useFetchContactsQuery } from './redux/contactsApi';
 
 // import Form from './Form/Form';
 // import Filter from './Filter/Filter';
@@ -52,7 +52,7 @@ function Phonebook() {
   //   );
   // };
 
-  const { data, isLoading } = useGetContactsQuery();
+  const { data, isLoading } = useFetchContactsQuery();
   console.log(data);
 
   return (
