@@ -2,4 +2,24 @@
   display: flex;
   gap: 20px;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  width: 100%;
+  padding: 15px;
+  border-radius: 50px;
+}
+.item:hover {
+  background-color: rgba(75, 75, 75, 0.05);
+}
+.item button {
+  width: 150px;
+  height: 36px;
+  font-size: large;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+.item button:hover {
+  background-color: #979797fa;
+  border: 1px solid rgba(0, 0, 0, 0.555);
 }

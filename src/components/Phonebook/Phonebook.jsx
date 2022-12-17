@@ -5,17 +5,18 @@ import Filter from './Filter/Filter';
 import Contacts from './Contacts/Contacts';
 import Section from './Section/Section';
 import Loader from './Loader/Loader';
+import css from '../Phonebook/Phonebook.module.css';
 
 function Phonebook() {
   const { isLoading } = useFetchContactsQuery();
 
   return (
-    <div>
+    <div className={css.main_container}>
       {isLoading ? (
-        <>
-          <h2>Идёт загрузка, подождите пожалуйста</h2>
+        <div className={css.loader}>
+          <h2>Loading, please wait...</h2>
           <Loader width={'96px'} />
-        </>
+        </div>
       ) : (
         <Section title={'Add contact to phonebook!'}>
           <Form />

@@ -1,17 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-import ContactItem from '../ContactItem/ContactItem';
 import { useFetchContactsQuery } from '../redux/contactsApi';
-import Loader from '../Loader/Loader';
+import ContactItem from '../ContactItem/ContactItem';
+// import Loader from '../Loader/Loader';
 
 function Contacts() {
-  const { data, isFetching } = useFetchContactsQuery();
+  const { data } = useFetchContactsQuery();
+  // isFetching;
+  const filter = useSelector(state => state.filter.query);
+  const filteredContacts = data.filter(item =>
+    item.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
   return (
     <ul>
-      {isFetching && <Loader width={'20px'} />}
-      {data && <ContactItem data={data} />}
+      {/* {isFetching && <Loader width={'20px'} />} */}
+      {data.length === 0 && <p>Sorry, You don't have contacts :(</p>}
+      {data &&
+        filteredContacts.map(({ id, name, number }) => (
+          <ContactItem key={id} id={id} name={name} number={number} />
+        ))}
     </ul>
   );
 }

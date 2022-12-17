@@ -1,24 +1,24 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFilter } from '../redux/filerSlicer';
+
+import { useFetchContactsQuery } from '../redux/contactsApi';
+import { changeFilter } from '../redux/filterSlicer';
+import css from './Filter.module.css';
 
 function Filter() {
+  const { data } = useFetchContactsQuery();
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.filter);
-
-  const handleChange = value => {
-    console.log('value:', value);
-    dispatch(changeFilter(value));
-  };
+  const filter = useSelector(state => state.filter.query);
 
   return (
-    <div>
+    <div className={css.filter_block}>
       <label>
-        Find contacts by Name:
+        Contact filter:
         <input
+          disabled={true ? data.length === 0 : data.length > 0}
           type="text"
           value={filter}
-          onChange={e => handleChange(e.target.value)}
+          onChange={e => dispatch(changeFilter(e.target.value))}
         />
       </label>
     </div>

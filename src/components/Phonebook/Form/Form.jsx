@@ -22,6 +22,7 @@ function Form() {
       case 'name':
         setName(evt.target.value);
         break;
+
       case 'number':
         setNumber(evt.target.value);
         break;
@@ -44,17 +45,24 @@ function Form() {
       toast.info(`"${copy.name}" already in  contacts!`);
       return;
     }
-
+    if (!name && number) {
+      toast.info('Please, enter a Name');
+      return;
+    }
+    if (name && !number) {
+      toast.info('Please, enter a Number');
+      return;
+    }
     if (name && number) {
       await addContact({ name: name, number: number }).unwrap();
     }
-    toast.success(`You have successfully added "${name}" to contacts!`);
+    toast.success(`You have successfully added "${name}" to you contacts!`);
     clearForm();
   };
 
   return (
     <>
-      <form onSubmit={onFormSubmit} className={css.form}>
+      <form className={css.form}>
         <label className={css.label__name}>
           Name:
           <input
@@ -80,12 +88,15 @@ function Form() {
             required
           />
         </label>
-
-        <button type="submit">
-          Add contact!
-          {isLoading ? <Loader width={'12px'} /> : null}
-        </button>
       </form>
+      <button
+        disabled={true ? name === '' && number === '' : false}
+        onClick={onFormSubmit}
+        type="submit"
+        className={css.form_button}
+      >
+        {isLoading ? <Loader width={'16px'} /> : <>Add contact!</>}
+      </button>
     </>
   );
 }
