@@ -12,7 +12,10 @@ function Phonebook() {
   return (
     <div>
       {isLoading ? (
-        <Loader />
+        <>
+          <h2>Идёт загрузка, подождите пожалуйста</h2>
+          <Loader width={'96px'} />
+        </>
       ) : (
         <Section title={'Add contact to phonebook!'}>
           <Form />

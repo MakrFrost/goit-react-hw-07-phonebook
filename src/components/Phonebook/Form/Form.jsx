@@ -1,15 +1,19 @@
+import { toast } from 'react-toastify';
 import { useState } from 'react';
-// import { nanoid } from 'nanoid';
 
-import { useAddContactMutation } from '../redux/contactsApi';
+import Loader from '../Loader/Loader';
+import {
+  useAddContactMutation,
+  useFetchContactsQuery,
+} from '../redux/contactsApi';
 import css from './Form.module.css';
 
 function Form() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const [addContact] = useAddContactMutation();
-  // {isLoading};
+  const { data: contacts } = useFetchContactsQuery();
+  const [addContact, { isLoading }] = useAddContactMutation();
 
   const inputChange = evt => {
     const inputName = evt.target.name;
@@ -35,14 +39,21 @@ function Form() {
     setName(name);
     setNumber(number);
 
+    const copy = contacts.find(contact => contact.name === name);
+    if (copy) {
+      toast.info(`"${copy.name}" already in  contacts!`);
+      return;
+    }
+
     if (name && number) {
       await addContact({ name: name, number: number }).unwrap();
     }
+    toast.success(`You have successfully added "${name}" to contacts!`);
     clearForm();
   };
 
   return (
-    <div>
+    <>
       <form onSubmit={onFormSubmit} className={css.form}>
         <label className={css.label__name}>
           Name:
@@ -70,9 +81,12 @@ function Form() {
           />
         </label>
 
-        <button type="submit">Add contact!</button>
+        <button type="submit">
+          Add contact!
+          {isLoading ? <Loader width={'12px'} /> : null}
+        </button>
       </form>
-    </div>
+    </>
   );
 }
 

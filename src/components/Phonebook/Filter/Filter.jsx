@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { change } from '../redux/filerSlicer';
+import { changeFilter } from '../redux/filerSlicer';
 
 function Filter() {
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.filter);
+  const filter = useSelector(state => state.filter.query);
 
   const handleChange = value => {
-    console.log('filter');
-    dispatch(change(value));
+    console.log('value:', value);
+    dispatch(changeFilter(value));
   };
 
   return (
@@ -18,7 +18,7 @@ function Filter() {
         <input
           type="text"
           value={filter}
-          onChange={event => handleChange(event.target.value)}
+          onChange={e => handleChange(e.target.value)}
         />
       </label>
     </div>
