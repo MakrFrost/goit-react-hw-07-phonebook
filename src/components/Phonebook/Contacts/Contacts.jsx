@@ -1,22 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useFetchContactsQuery } from './redux/contactsApi';
+import { toast } from 'react-toastify';
 
+import {
+  useFetchContactsQuery,
+  useDeleteContactMutation,
+} from '../redux/contactsApi';
 import css from './Contacts.module.css';
 
 function Contacts() {
   const { data } = useFetchContactsQuery();
-  console.log(data);
+  const [deleteContact] = useDeleteContactMutation();
+
+  const handleDeleteContact = async id => {
+    await deleteContact(id).unwrap();
+  };
 
   return (
     <ul>
-      {/* {contacts.map(({ id, name, number }) => (
+      {data.map(({ id, name, number }) => (
         <li key={id} id={id} className={css.item}>
           <p>{name}</p>
           <p>{number}</p>
-          <button onClick={() => onDeleteContact(id)}>Delete</button>
+          <button
+            onClick={() => {
+              handleDeleteContact(id);
+              toast.error(`You removed ${name} from your contacts!`);
+            }}
+          >
+            Delete contact
+          </button>
         </li>
-      ))} */}
+      ))}
     </ul>
   );
 }

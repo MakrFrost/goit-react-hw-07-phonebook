@@ -2,7 +2,7 @@ import { useFetchContactsQuery } from './redux/contactsApi';
 
 import Form from './Form/Form';
 import Filter from './Filter/Filter';
-// import Contacts from './Contacts/Contacts';
+import Contacts from './Contacts/Contacts';
 import Section from './Section/Section';
 import Loader from './Loader/Loader';
 
@@ -18,7 +18,7 @@ function Phonebook() {
           <Form />
           <Section title={'Contacts:'} />
           <Filter />
-          {/* <Contacts /> */}
+          <Contacts />
         </Section>
       )}
     </div>

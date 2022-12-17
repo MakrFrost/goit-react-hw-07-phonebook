@@ -5,7 +5,9 @@ import { change } from '../redux/filerSlicer';
 function Filter() {
   const dispatch = useDispatch();
   const filter = useSelector(state => state.filter);
+
   const handleChange = value => {
+    console.log('filter');
     dispatch(change(value));
   };
 
