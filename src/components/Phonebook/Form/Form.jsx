@@ -42,7 +42,7 @@ function Form() {
 
     const copy = contacts.find(contact => contact.name === name);
     if (copy) {
-      toast.info(`"${copy.name}" already in  contacts!`);
+      toast.info(`A "${copy.name}" already in  contacts!`);
       return;
     }
     if (!name && number) {
@@ -53,10 +53,14 @@ function Form() {
       toast.info('Please, enter a Number');
       return;
     }
+    if (name === '' && number === '') {
+      toast.info('Please, enter Name and Number!');
+    }
     if (name && number) {
       await addContact({ name: name, number: number }).unwrap();
+      toast.success(`You have successfully added "${name}" to you contacts!`);
     }
-    toast.success(`You have successfully added "${name}" to you contacts!`);
+
     clearForm();
   };
 
@@ -66,6 +70,7 @@ function Form() {
         <label className={css.label__name}>
           Name:
           <input
+            placeholder="JUGGERNAUT"
             value={name}
             onChange={inputChange}
             name="name"
@@ -79,6 +84,7 @@ function Form() {
         <label className={css.label__number}>
           Number:
           <input
+            placeholder="+7209282291"
             value={number}
             onChange={inputChange}
             name="number"

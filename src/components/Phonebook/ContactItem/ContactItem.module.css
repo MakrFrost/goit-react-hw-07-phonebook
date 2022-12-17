@@ -1,15 +1,25 @@
 .item {
+  position: relative;
   display: flex;
   gap: 20px;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 5px;
+  margin-bottom: 9px;
   width: 100%;
   padding: 15px;
   border-radius: 50px;
 }
 .item:hover {
   background-color: rgba(75, 75, 75, 0.05);
+}
+.item::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 .item button {
   width: 150px;
@@ -22,4 +32,8 @@
 .item button:hover {
   background-color: #979797fa;
   border: 1px solid rgba(0, 0, 0, 0.555);
+}
+.item button:disabled {
+  border: 1px solid rgba(219, 0, 0, 0.3);
+  background-color: rgba(255, 0, 0, 0.255);
 }
