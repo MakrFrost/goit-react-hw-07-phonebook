@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useFetchContactsQuery } from '../redux/contactsApi';
 import { changeFilter } from '../redux/filterSlicer';
+import FilterImg from '../Images/FilterImg';
 import css from './Filter.module.css';
 
 function Filter() {
@@ -20,6 +21,7 @@ function Filter() {
           value={filter}
           onChange={e => dispatch(changeFilter(e.target.value))}
         />
+        <FilterImg />
       </label>
     </div>
   );

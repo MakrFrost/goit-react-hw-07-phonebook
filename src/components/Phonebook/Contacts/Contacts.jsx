@@ -15,12 +15,12 @@ function Contacts() {
 
   return (
     <ul>
+      {isFetching && <Loader width={'30px'} />}
       {data.length === 0 && <p>Sorry, You don't have contacts :(</p>}
       {data &&
         filteredContacts.map(({ id, name, number }) => (
           <ContactItem key={id} id={id} name={name} number={number} />
         ))}
-      {isFetching && <Loader width={'40px'} />}
     </ul>
   );
 }

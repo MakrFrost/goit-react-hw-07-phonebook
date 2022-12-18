@@ -6,6 +6,8 @@ import {
   useAddContactMutation,
   useFetchContactsQuery,
 } from '../redux/contactsApi';
+import NameImg from '../Images/NameImg';
+import NumberImg from '../Images/NumberImg';
 import css from './Form.module.css';
 
 function Form() {
@@ -79,6 +81,7 @@ function Form() {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
+          <NameImg />
         </label>
 
         <label className={css.label__number}>
@@ -93,6 +96,7 @@ function Form() {
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />
+          <NumberImg />
         </label>
       </form>
       <button

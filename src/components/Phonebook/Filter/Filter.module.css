@@ -9,3 +9,12 @@
 .filter_block input {
   width: 436px;
 }
+label {
+  position: relative;
+}
+label img {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
