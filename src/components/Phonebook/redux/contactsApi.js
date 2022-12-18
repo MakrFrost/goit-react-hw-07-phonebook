@@ -9,13 +9,7 @@ export const contactsApi = createApi({
   endpoints: builder => ({
     fetchContacts: builder.query({
       query: () => '/Phonebook',
-      providesTags: result =>
-        result
-          ? [
-              ...result.map(({ id }) => ({ type: 'Contacts', id })),
-              { type: 'Contacts', id: 'LIST' },
-            ]
-          : [{ type: 'Contacts', id: 'LIST' }],
+      providesTags: [{ type: 'Contacts', id: 'LIST' }],
     }),
     addContact: builder.mutation({
       query: body => ({
